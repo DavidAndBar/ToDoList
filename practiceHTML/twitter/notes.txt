@@ -1,5 +1,0 @@
-I finish the first part of this practice, I created it with the help of my professor in Diplomado Software Development. I learn how to recreate
-a Twitter appearance, I learnt html and CSS coding. We took the mockup from Figma:
-https://www.figma.com/file/Rax0sO6iBFdvryH7sKGNh8/Login-View-(Community)?type=design&node-id=1-2&t=ZghrGBiCQ3GFPN3I-0
-
-As I worked alone in the building of index.html style, I think I could organize better css stylesheet by dividing each style in individual files.
