@@ -28,7 +28,7 @@ const SignUp = () => {
             redirect: 'follow'
             };
 
-            fetch("http://localhost:8080/auth/register", requestOptions) //https://todolistbackend-db.azurewebsites.net/auth/register", requestOptions)
+            fetch("https://todolistbackend-db.azurewebsites.net/auth/register", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.message) {

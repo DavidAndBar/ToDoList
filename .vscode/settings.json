@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/bb2de6c4-004f-41b4-99fa-ebc0971ef194/resourceGroups/todolistbackend-db_group/providers/Microsoft.Web/sites/todolistbackend-db",
+    "appService.deploySubpath": "toDoBack"
+}

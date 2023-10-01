@@ -6,6 +6,7 @@ const Home = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
 const logout = () => {
     setIsAuth(false);
     setSecurityToken("");
+    document.cookie = `token=`
 }
 
 return <>

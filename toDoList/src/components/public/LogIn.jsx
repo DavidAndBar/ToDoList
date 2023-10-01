@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
+const LogIn = ({checkSecurityToken, isAuth, setIsAuth, securityToken, setSecurityToken}) => {
 
     const [ checkCredentials , setCheckCredentials] = useState(false)
 
     const submitForm = (e) => {
+        document.getElementById("loginButton").disabled = true;
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -22,17 +23,19 @@ const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/auth/login", requestOptions) //fetch("https://todolistbackend-db.azurewebsites.net/auth/login", requestOptions)
+        fetch("https://todolistbackend-db.azurewebsites.net/auth/login", requestOptions)
         .then(response => {
             response.json()
             .then(result => {
-                console.log(result);
                 if (result.message) { 
                     setCheckCredentials(false);
-                    setIsAuth(result.message);
-                    setSecurityToken(response.headers.get("auth-token"));
+                    //setIsAuth(result.message);
+                    document.cookie = `token=${response.headers.get("auth-token")}`;
+                    checkSecurityToken();
+                    window.location.href = '/'
                 } else {
                     setCheckCredentials(true);
+                    document.getElementById("loginButton").disabled = false;        
                 }
             })
         })
@@ -50,7 +53,7 @@ const LogIn = ({isAuth, setIsAuth, securityToken, setSecurityToken}) => {
         <label htmlFor="password"> Password </label><br/>
         <input htmlFor="password" id="password" name="password" type="password" required/><br/>
         { checkCredentials && <> Wrong email or password! </> }
-        <button type="submit"> Log In </button>
+        <button id="loginButton" type="submit"> Log In </button>
         <p>Don't have an account? <Link to="/signUp">Join free today</Link></p>
     </form>
     </>

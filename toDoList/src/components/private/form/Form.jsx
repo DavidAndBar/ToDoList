@@ -55,7 +55,6 @@ const Form = () => {
         localStorage.setItem("List2", JSON.stringify(item2))
         localStorage.setItem("List3", JSON.stringify(item3))
         localStorage.setItem("List4", JSON.stringify(item4))
-        console.log("Tasks saved");
     }
 
     saveTask();

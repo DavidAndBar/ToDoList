@@ -37,7 +37,6 @@ router.post('/login', async (req, res) => {
             .then(comp => {
                 if (comp) {
                     const token = jwt.sign({
-                            name: result.name,
                             id: result._id
                         }, process.env.SECRET_TOKEN, {expiresIn : "10 year"});
                     
@@ -55,5 +54,16 @@ router.post('/login', async (req, res) => {
     .catch(error => res.json({message: error}));
 
 })
+
+router.post('/checktoken', (req, res) => {
+    const token = req.body.token;
+    try {
+        const response = jwt.verify(token, process.env.SECRET_TOKEN);
+        res.json({message: response.id});
+    } catch {
+        res.json({message: false});
+    }
+})
+
 
 module.exports = router;
