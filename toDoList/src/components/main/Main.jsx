@@ -38,12 +38,14 @@ const Main = () =>{
     
     checkSecurityToken();
 
-    /*const expDate = new Date();
-    const expToken = "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"+
-    ".eyJpZCI6IjY1MTQzY2E2OGYzZDNhMjAwNjIwMjMwMyIsImlhdCI6MTY5Njk1NTQwOCwiZXhwIjoyMDEyNTMxNDA4fQ"+
-    ".rMgXyuk5K7pUsPa0hJye9S7aqTFEIV2BJQ93yZuBssw";
-    expDate.setTime(expDate.getTime() + 365*24*60*60*1000) // 1 year
-    console.log(expToken + ";expires=" +expDate.toUTCString());*/
+    // const expDate = new Date();
+    // const expToken = "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"+
+    // ".eyJpZCI6IjY1MTQzY2E2OGYzZDNhMjAwNjIwMjMwMyIsImlhdCI6MTY5Njk1NTQwOCwiZXhwIjoyMDEyNTMxNDA4fQ"+
+    // ".rMgXyuk5K7pUsPa0hJye9S7aqTFEIV2BJQ93yZuBssw";
+    // expDate.setTime(expDate.getTime() + 365*24*60*60*1000) // 1 year
+    // const cook =  expToken + ";expires=" +expDate.toUTCString(); 
+    // console.log(cook.slice(6,-38));
+    // // Use = string.slice(7,-6); 7 is the start point, -6 the lenght from middle to end.
 
     return <>
             <BrowserRouter>

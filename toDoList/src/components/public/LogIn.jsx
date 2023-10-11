@@ -8,6 +8,9 @@ const LogIn = ({checkSecurityToken, isAuth, setIsAuth, securityToken, setSecurit
 
     const submitForm = (e) => {
         document.getElementById("loginButton").disabled = true;
+        document.getElementById("hiddenLoader").className = "loader";
+        document.getElementById("hiddenLoaderBar").className = "loaderBar";
+
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -30,12 +33,16 @@ const LogIn = ({checkSecurityToken, isAuth, setIsAuth, securityToken, setSecurit
                 if (result.message) { 
                     setCheckCredentials(false);
                     //setIsAuth(result.message);
-                    document.cookie = `token=${response.headers.get("auth-token")}`;
+                    const expDate = new Date();
+                    expDate.setTime(expDate.getTime() + 365*24*60*60*1000) // 1 year
+                    document.cookie = `token=${response.headers.get("auth-token")};expires=${expDate.toUTCString()}`;
                     checkSecurityToken();
-                    window.location.href = '/'
+                    window.location.href = '/';
                 } else {
                     setCheckCredentials(true);
-                    document.getElementById("loginButton").disabled = false;        
+                    document.getElementById("loginButton").disabled = false;
+                    document.getElementById("hiddenLoader").className = "hiddenLoader";
+                    document.getElementById("hiddenLoaderBar").className = "hiddenLoaderBar";    
                 }
             })
         })
@@ -53,6 +60,7 @@ const LogIn = ({checkSecurityToken, isAuth, setIsAuth, securityToken, setSecurit
         <label htmlFor="password"> Password </label><br/>
         <input htmlFor="password" id="password" name="password" type="password" required/><br/>
         { checkCredentials && <> Wrong email or password! </> }
+        <div id="hiddenLoader" className="hiddenLoader"><div id="hiddenLoaderBar" className="hiddenLoaderBar"></div></div>
         <button id="loginButton" type="submit"> Log In </button>
         <p>Don't have an account? <Link to="/signUp">Join free today</Link></p>
     </form>
