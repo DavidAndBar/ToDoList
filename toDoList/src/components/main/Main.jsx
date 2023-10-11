@@ -1,5 +1,5 @@
 import { useState } from 'react'; // We import useState from react to use it to render variables.
-import { Route, BrowserRouter, Routes} from 'react-router-dom';
+import { Route, BrowserRouter, Routes, Navigate} from 'react-router-dom';
 import Home from '../private/home/home.jsx';
 import Index from '../public/LogIn.jsx';
 import SignUp from '../public/SignUp.jsx';
@@ -9,7 +9,6 @@ const Main = () =>{
     const [securityToken, setSecurityToken] = useState(document.cookie.slice(6));
 
     const checkSecurityToken = () => {
-        
         if (securityToken !== "") {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -36,29 +35,22 @@ const Main = () =>{
         }
     }
     
-    checkSecurityToken();
-
-    // const expDate = new Date();
-    // const expToken = "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"+
-    // ".eyJpZCI6IjY1MTQzY2E2OGYzZDNhMjAwNjIwMjMwMyIsImlhdCI6MTY5Njk1NTQwOCwiZXhwIjoyMDEyNTMxNDA4fQ"+
-    // ".rMgXyuk5K7pUsPa0hJye9S7aqTFEIV2BJQ93yZuBssw";
-    // expDate.setTime(expDate.getTime() + 365*24*60*60*1000) // 1 year
-    // const cook =  expToken + ";expires=" +expDate.toUTCString(); 
-    // console.log(cook.slice(6,-38));
-    // // Use = string.slice(7,-6); 7 is the start point, -6 the lenght from middle to end.
-
     return <>
             <BrowserRouter>
                 <Routes>
+                    {checkSecurityToken()}
                     {
                         !!!isAuth ?<>
                         <Route path="/" element={<Index checkSecurityToken={checkSecurityToken} isAuth={isAuth} setIsAuth={setIsAuth}
                                                         securityToken={securityToken} setSecurityToken={setSecurityToken}/>} />
                         <Route path="/signUp" element={<SignUp />}/>
+                        <Route path="*" element={<Navigate to='/' />}/>
                         </> :
                         <> 
                         <Route path="/" element={<Home isAuth={isAuth} setIsAuth={setIsAuth}
-                                                        securityToken={securityToken} setSecurityToken={setSecurityToken}/>} /></>
+                                                        securityToken={securityToken} setSecurityToken={setSecurityToken}/>} />
+                        <Route path="*" element={<Navigate to='/' />}/>                                
+                        </>
                     }
                 </Routes>
             </BrowserRouter>
